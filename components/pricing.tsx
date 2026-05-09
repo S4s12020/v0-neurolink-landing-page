@@ -3,8 +3,17 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
+import { useModal } from '@/lib/modal-context';
 
 export default function Pricing() {
+  const { openDemo } = useModal();
+
+  const handlePricingAction = (cta: string) => {
+    if (cta === 'Contact Sales') {
+      openDemo();
+    }
+  };
+
   const plans = [
     {
       name: 'Starter',
@@ -112,15 +121,22 @@ export default function Pricing() {
                   )}
                 </div>
 
-                <Button
-                  className={`w-full mb-8 rounded-lg font-semibold ${
-                    plan.highlighted
-                      ? 'bg-primary hover:bg-primary/90 text-white'
-                      : 'bg-foreground/10 hover:bg-foreground/20 text-foreground'
-                  }`}
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full mb-8"
                 >
-                  {plan.cta}
-                </Button>
+                  <Button
+                    onClick={() => handlePricingAction(plan.cta)}
+                    className={`w-full rounded-lg font-semibold focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all ${
+                      plan.highlighted
+                        ? 'bg-primary hover:bg-primary/90 text-white'
+                        : 'bg-foreground/10 hover:bg-foreground/20 text-foreground'
+                    }`}
+                  >
+                    {plan.cta}
+                  </Button>
+                </motion.div>
 
                 {/* Features */}
                 <ul className="space-y-4">

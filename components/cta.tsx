@@ -3,10 +3,13 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { useModal } from '@/lib/modal-context';
 
 export default function CTA() {
+  const { openDemo } = useModal();
+
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8">
+    <section id="blog" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Background gradients */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -60,17 +63,28 @@ export default function CTA() {
             viewport={{ once: true }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white rounded-lg px-8">
-              Start Free Trial
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-border bg-transparent hover:bg-card text-foreground rounded-lg px-8"
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Schedule Demo
-            </Button>
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white rounded-lg px-8 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all">
+                Start Free Trial
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button
+                onClick={openDemo}
+                size="lg"
+                variant="outline"
+                className="border-border bg-transparent hover:bg-card text-foreground rounded-lg px-8 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+              >
+                Schedule Demo
+              </Button>
+            </motion.div>
           </motion.div>
 
           <motion.p

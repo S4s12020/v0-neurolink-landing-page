@@ -3,10 +3,13 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ChevronRight, Sparkles } from 'lucide-react';
+import { useModal } from '@/lib/modal-context';
 
 export default function Hero() {
+  const { openDemo } = useModal();
+
   return (
-    <section className="min-h-screen pt-32 pb-20 relative overflow-hidden">
+    <section id="product" className="min-h-screen pt-32 pb-20 relative overflow-hidden">
       {/* Gradient background */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/20 rounded-full blur-3xl opacity-20"></div>
@@ -62,12 +65,27 @@ export default function Hero() {
             transition={{ delay: 0.5, duration: 0.8 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white rounded-lg px-8">
-              Start Your Journey
-            </Button>
-            <Button size="lg" variant="outline" className="border-border bg-transparent hover:bg-card text-foreground rounded-lg px-8">
-              Watch Demo <ChevronRight className="w-4 h-4 ml-2" />
-            </Button>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white rounded-lg px-8 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all">
+                Start Your Journey
+              </Button>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button
+                onClick={openDemo}
+                size="lg"
+                variant="outline"
+                className="border-border bg-transparent hover:bg-card text-foreground rounded-lg px-8 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+              >
+                Watch Demo <ChevronRight className="w-4 h-4 ml-2" />
+              </Button>
+            </motion.div>
           </motion.div>
 
           {/* Trust Indicators */}
