@@ -1,34 +1,13 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
-import { ModalProvider } from '@/lib/modal-context'
-import { SignInModal, ScheduleDemoModal } from '@/components/modals'
+import { Geist } from 'next/font/google'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'NeuroLink - AI Mental Health Support for Students',
-  description: 'Your personal AI mental health companion. Get 24/7 support, science-backed therapy techniques, and connect with your campus community.',
+  title: 'NeuroLink - App Móvil de Bienestar Emocional',
+  description: 'Aplicación móvil de soporte emocional para estudiantes. Registra tus emociones, obtén análisis IA, conecta con la comunidad y cuida tu bienestar mental.',
   generator: 'v0.app',
-  icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
-  },
 }
 
 export default function RootLayout({
@@ -37,14 +16,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark bg-background">
-      <body className="font-sans antialiased">
-        <ModalProvider>
+    <html lang="es" className="dark bg-[#0F172A]">
+      <body className="font-sans antialiased bg-[#0F172A] flex items-center justify-center min-h-screen">
+        <div className="w-full max-w-md">
           {children}
-          <SignInModal />
-          <ScheduleDemoModal />
-        </ModalProvider>
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        </div>
       </body>
     </html>
   )
